@@ -1,6 +1,6 @@
 # Late changes to the plugin (late July 2022 versions updates)
 Since this [project](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated) has sadly been dropped after 3 years (as mentioned below) of maintaining due to lack of sponsorship from the community, it no longer works with the latest plugin updates or at least creates some build issues for both iOS and Android applications using this plugin like : 
-**\[capacitor]   Execution failed for task ':capacitor-cordova-android-plugins:compileDebugJavaWithJavac'**
+**\[capacitor]   Execution failed for task ':capacitor-cordova-android-plugins:compileDebugJavaWithJavac'** 
 Undefined symbol: **_OBJC_CLASS_$_FIRAnalytics**
 
 This project is therefore an update that fixes some of the compatibility issues mentioned above.
