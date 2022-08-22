@@ -1,18 +1,13 @@
-⚠️ After 3 years of developing and maintaining this plugin, due to the lack of sponsorship from the community and more promising opportunities, this project is now frozen. Anyone can clone and continue the good work. ⚠️
+# Late changes to the plugin (updates using late July 2022 versions)
+Since this [project](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated) has sadly been dropped after 3 years (as mentioned below) of maintaining due to lack of sponsorship from the community, it no longer works with the latest plugin updates or at least creates some build issues for both iOS and Android applications using this plugin like : 
+**\[capacitor]   Execution failed for task ':capacitor-cordova-android-plugins:compileDebugJavaWithJavac'**
+Undefined symbol: **_OBJC_CLASS_$_FIRAnalytics**
+
+This project is therefore an update that fixes some of the compatibility issues mentioned above.
+You may check this [Firebase doc](https://firebase.google.com/docs/projects/manage-installations?hl=en#java_8) for more insight on the migration from Instance ID to Firebase installations used in this fork.
 
 # Google Firebase Cloud Messaging Cordova Push Plugin
 > Extremely easy plug&play push notification plugin for Cordova applications with Google Firebase FCM.
-
-[![Donate](https://img.shields.io/badge/Donate-Paypal-0a83fc.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B33LA4QVUGVBW&source=url)
-[![npm downloads](https://img.shields.io/npm/dt/cordova-plugin-fcm-with-dependecy-updated.svg)](https://www.npmjs.com/package/cordova-plugin-fcm-with-dependecy-updated)
-[![npm per month](https://img.shields.io/npm/dm/cordova-plugin-fcm-with-dependecy-updated.svg)](https://www.npmjs.com/package/cordova-plugin-fcm-with-dependecy-updated)
-[![npm version](https://img.shields.io/npm/v/cordova-plugin-fcm-with-dependecy-updated.svg)](https://www.npmjs.com/package/cordova-plugin-fcm-with-dependecy-updated)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.svg)](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/issues)
-[![GitHub forks](https://img.shields.io/github/forks/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.svg)](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/network)
-[![GitHub stars](https://img.shields.io/github/stars/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.svg)](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/stargazers)
-[![Known Vulnerabilities](https://snyk.io/test/github/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andrehtissot/cordova-plugin-fcm-with-dependecy-updated?targetFile=package.json)
-[![DeepScan grade](https://deepscan.io/api/teams/3417/projects/5068/branches/39495/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3417&pid=5068&bid=39495)
 
 [How it works](#how-it-works) | [Installation](#installation) | [Push Payload Configuration](#push-payload-configuration) |  [Features](#features) | [Example Apps](#example-apps) | [Companion Plugins](#companion-plugins) | [Changelog](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/blob/master/CHANGELOG.md) | [Authorship](#authorship)
 
