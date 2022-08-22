@@ -4,7 +4,7 @@ Since this [project](https://github.com/andrehtissot/cordova-plugin-fcm-with-dep
   -   Undefined symbol: **_OBJC_CLASS_$_FIRAnalytics**  
 
 This project is therefore an update that fixes some of the compatibility issues mentioned above.
-You may check this [Firebase doc](https://firebase.google.com/docs/projects/manage-installations?hl=en#java_8) for more insight on the migration from Instance ID to Firebase installations used in this fork.
+You may check this [Firebase doc](https://firebase.google.com/docs/projects/manage-installations?hl=en#java_8) for more insight on the migration from **Instance ID** to **Firebase installations** used in this fork.
 
 # Google Firebase Cloud Messaging Cordova Push Plugin
 > Extremely easy plug&play push notification plugin for Cordova applications with Google Firebase FCM.
