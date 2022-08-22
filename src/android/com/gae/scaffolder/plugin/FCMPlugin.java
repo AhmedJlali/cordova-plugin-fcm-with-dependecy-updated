@@ -1,5 +1,6 @@
 package com.gae.scaffolder.plugin;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,8 +10,10 @@ import com.gae.scaffolder.plugin.interfaces.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+/*import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;*/
+//import com.google.firebase.installations.remote.TokenResult;
+import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.apache.cordova.CallbackContext;
@@ -179,7 +182,7 @@ public class FCMPlugin extends CordovaPlugin {
 
     public void getToken(final TokenListeners<String, JSONObject> callback) {
         try {
-            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            /*FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                 @Override
                 public void onComplete(Task<InstanceIdResult> task) {
                     if (!task.isSuccessful()) {
@@ -199,9 +202,31 @@ public class FCMPlugin extends CordovaPlugin {
                     Log.i(TAG, "\tToken: " + newToken);
                     callback.success(newToken);
                 }
-            });
+            });*/
 
-            FirebaseInstanceId.getInstance().getInstanceId().addOnFailureListener(new OnFailureListener() {
+          FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+              if (!task.isSuccessful()) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                try {
+                  callback.error(exceptionToJson(task.getException()));
+                }
+                catch (JSONException jsonErr) {
+                  Log.e(TAG, "Error when parsing json", jsonErr);
+                }
+                return;
+              }
+
+              // Get new FCM registration token
+              String newToken = task.getResult();
+
+              Log.i(TAG, "\tToken: " + newToken);
+              callback.success(newToken);
+            }
+          });
+
+            /*FirebaseInstanceId.getInstance().getInstanceId().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(final Exception e) {
                     try {
@@ -211,7 +236,19 @@ public class FCMPlugin extends CordovaPlugin {
                         Log.e(TAG, "Error when parsing json", jsonErr);
                     }
                 }
-            });
+            });*/
+
+          FirebaseInstallations.getInstance().getId().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(final Exception e) {
+              try {
+                Log.e(TAG, "Error retrieving token: ", e);
+                callback.error(exceptionToJson(e));
+              } catch (JSONException jsonErr) {
+                Log.e(TAG, "Error when parsing json", jsonErr);
+              }
+            }
+          });
         } catch (Exception e) {
             Log.w(TAG, "\tError retrieving token", e);
             try {
@@ -224,7 +261,17 @@ public class FCMPlugin extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
-                    FirebaseInstanceId.getInstance().deleteInstanceId();
+                    //FirebaseInstanceId.getInstance().deleteInstanceId();
+                  FirebaseInstallations.getInstance().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                      @Override
+                      public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                          Log.d("Installations", "Installation deleted");
+                        } else {
+                          Log.e("Installations", "Unable to delete Installation");
+                        }
+                      }
+                    });
                     callbackContext.success();
                 } catch (Exception e) {
                     callbackContext.error(e.getMessage());
